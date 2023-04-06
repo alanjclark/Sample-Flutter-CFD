@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import '../../../constants/colors.dart';
 import '../../../models/cart.dart';
 import '../../../models/food.dart';
-import '../cart.dart';
 
 class CartItem extends StatelessWidget {
   final Food food;
   final Cart cart;
-  CartItem(this.food, this.cart);
+  const CartItem(this.food, this.cart, {super.key});
 
   void removeFromCart(BuildContext context) {
     cart.items.removeAt(cart.items.indexOf(food));
@@ -24,14 +23,14 @@ class CartItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             width: 110,
             height: 110,
             child: Image.asset(food.imgUrl, fit: BoxFit.fitHeight),
           ),
           Expanded(
               child: Container(
-            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,11 +38,13 @@ class CartItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(food.name,
+                        // ignore: prefer_const_constructors
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             height: 1.5)),
                     InkWell(
+                      // ignore: prefer_const_constructors
                       child: Icon(
                         Icons.cancel,
                         size: 30,
@@ -57,15 +58,16 @@ class CartItem extends StatelessWidget {
                     style: TextStyle(
                         color: food.highlight ? kPrimaryGreen : kPrimaryColor,
                         height: 1.5)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    Text('\$',
+                    const Text('\$',
                         style: TextStyle(
                             fontSize: 10, fontWeight: FontWeight.bold)),
                     Text('${food.price}',
+                        // ignore: prefer_const_constructors
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                   ],

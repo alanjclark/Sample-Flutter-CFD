@@ -6,21 +6,22 @@ class FoodList extends StatelessWidget {
   final int selected;
   final Function callback;
   final Restaurant restaurant;
-  FoodList(this.selected, this.callback, this.restaurant);
+  const FoodList(this.selected, this.callback, this.restaurant, {super.key});
 
   @override
   Widget build(BuildContext context) {
     final category = restaurant.menu.keys.toList();
     return Container(
         height: 100,
-        padding: EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.symmetric(vertical: 30),
         child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => GestureDetector(
                   onTap: () => callback(index),
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: selected == index
@@ -28,12 +29,12 @@ class FoodList extends StatelessWidget {
                             : kSecondaryColor),
                     child: Text(
                       category[index],
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ),
                 ),
-            separatorBuilder: (_, index) => SizedBox(
+            separatorBuilder: (_, index) => const SizedBox(
                   width: 20,
                 ),
             itemCount: category.length));

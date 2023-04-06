@@ -8,7 +8,7 @@ import 'package:sample_flutter_cfd/widgets/custom_app_bar.dart';
 
 class CartView extends StatelessWidget {
   final Cart cart;
-  CartView(this.cart);
+  const CartView(this.cart, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CartView extends StatelessWidget {
             Icons.delete_forever,
             leftCallback: () => Navigator.of(context).pop(),
           ),
-          CartHeader(),
+          const CartHeader(),
           CartListView(cart),
           CartTotal(cart),
         ])));

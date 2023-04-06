@@ -8,7 +8,7 @@ import '../../cart/cart.dart';
 class AddFood extends StatelessWidget {
   final Food food;
   final Cart cart;
-  AddFood(this.food, this.cart);
+  const AddFood(this.food, this.cart, {super.key});
 
   void addToCart(Food food, Cart cart, BuildContext context) {
     cart.items.add(food);
@@ -19,11 +19,12 @@ class AddFood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(25),
+      padding: const EdgeInsets.all(25),
       width: double.infinity,
+      // ignore: prefer_const_constructors
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomRight: Radius.circular(50),
           bottomLeft: Radius.circular(50),
         ),
@@ -31,24 +32,24 @@ class AddFood extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Text(
+          const Text(
             'Like this item?',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
                 fontStyle: FontStyle.italic),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           InkWell(
             child: Container(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 color: kPrimaryColor,
               ),
-              child: Text(
+              child: const Text(
                 'add to cart',
                 style: TextStyle(
                     fontSize: 20,
@@ -58,7 +59,7 @@ class AddFood extends StatelessWidget {
             ),
             onTap: () => {addToCart(food, cart, context)},
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],

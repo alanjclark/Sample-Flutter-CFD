@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sample_flutter_cfd/models/restaurant.dart';
 import '../../../models/cart.dart';
-import '../../../models/food.dart';
 import '../../detail/detail.dart';
 import 'food_item.dart';
 
@@ -12,13 +11,14 @@ class FoodListView extends StatelessWidget {
   final Restaurant restaurant;
   final Cart cart;
 
-  FoodListView(this.selected, this.callback, this.pageController,
-      this.restaurant, this.cart);
+  const FoodListView(this.selected, this.callback, this.pageController,
+      this.restaurant, this.cart,
+      {super.key});
   @override
   Widget build(BuildContext context) {
     final category = restaurant.menu.keys.toList();
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 25),
       child: PageView(
         controller: pageController,
         onPageChanged: (index) => callback(index),
@@ -34,7 +34,7 @@ class FoodListView extends StatelessWidget {
                     },
                     child:
                         FoodItem(restaurant.menu[category[selected]]![index])),
-                separatorBuilder: (_, index) => SizedBox(
+                separatorBuilder: (_, index) => const SizedBox(
                       height: 15,
                     ),
                 itemCount: restaurant.menu[category[selected]]!.length))

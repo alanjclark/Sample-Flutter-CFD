@@ -11,7 +11,7 @@ import '../../models/food.dart';
 class DetailPage extends StatelessWidget {
   final Food food;
   final Cart cart;
-  DetailPage(this.food, this.cart);
+  const DetailPage(this.food, this.cart, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class DetailPage extends StatelessWidget {
         ],
       )),
       floatingActionButton: cart.items.isNotEmpty
-          ? Container(
+          ? SizedBox(
               width: 100,
               height: 56,
               child: RawMaterialButton(
@@ -42,20 +42,20 @@ class DetailPage extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.shopping_bag_outlined,
                         color: Colors.white,
                         size: 30,
                       ),
                       Container(
-                        padding: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.all(15),
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
                         ),
                         child: Text(
                           cart.items.length.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24,
                             color: kPrimaryColor,
@@ -76,7 +76,7 @@ class DetailPage extends StatelessWidget {
               },
               backgroundColor: kPrimaryGreen,
               elevation: 2,
-              child: Icon(Icons.shopping_bag_outlined,
+              child: const Icon(Icons.shopping_bag_outlined,
                   color: Colors.black, size: 30),
             ),
     );

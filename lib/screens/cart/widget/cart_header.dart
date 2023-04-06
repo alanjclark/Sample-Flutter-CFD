@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sample_flutter_cfd/constants/colors.dart';
-import 'package:sample_flutter_cfd/models/food.dart';
 
 class CartHeader extends StatelessWidget {
+  const CartHeader({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 250,
         child: Stack(
           children: [
@@ -18,7 +18,7 @@ class CartHeader extends StatelessWidget {
                 Expanded(
                     flex: 1,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(50),
                           topRight: Radius.circular(50),
@@ -31,13 +31,13 @@ class CartHeader extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Container(
-                  margin: EdgeInsets.all(15),
+                  margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.white,
-                        offset: const Offset(0.0, 0.0),
+                        offset: Offset(0.0, 0.0),
                         blurRadius: 0.0,
                         spreadRadius: 30.0,
                       )

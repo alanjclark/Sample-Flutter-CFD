@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:sample_flutter_cfd/constants/colors.dart';
 import 'package:sample_flutter_cfd/models/food.dart';
@@ -8,23 +6,23 @@ import 'food_quantity.dart';
 
 class FoodDetail extends StatelessWidget {
   final Food food;
-  FoodDetail(this.food);
+  const FoodDetail(this.food, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(25),
+      padding: const EdgeInsets.all(25),
       color: Colors.white,
       child: Column(
         children: [
           Text(
             food.name,
-            style: TextStyle(
+            style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
                 fontStyle: FontStyle.italic),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
@@ -37,25 +35,25 @@ class FoodDetail extends StatelessWidget {
               _buildIconText(Icons.local_fire_department, Colors.red, food.cal)
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           FoodQuantity(food),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             'About',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
-            '${food.about}',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            food.about,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
         ],
@@ -72,7 +70,7 @@ Widget _buildIconText(IconData icon, Color color, String text) {
         color: color,
         size: 20,
       ),
-      Text(text, style: TextStyle(fontSize: 16))
+      Text(text, style: const TextStyle(fontSize: 16))
     ],
   );
 }

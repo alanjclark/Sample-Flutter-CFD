@@ -4,7 +4,7 @@ import 'package:sample_flutter_cfd/models/food.dart';
 
 class FoodItem extends StatelessWidget {
   final Food food;
-  FoodItem(this.food);
+  const FoodItem(this.food, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,14 @@ class FoodItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             width: 110,
             height: 110,
             child: Image.asset(food.imgUrl, fit: BoxFit.fitHeight),
           ),
           Expanded(
               child: Container(
-            padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -30,11 +30,11 @@ class FoodItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(food.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             height: 1.5)),
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward_ios_outlined,
                       size: 15,
                     )
@@ -44,16 +44,16 @@ class FoodItem extends StatelessWidget {
                     style: TextStyle(
                         color: food.highlight ? kPrimaryGreen : kPrimaryColor,
                         height: 1.5)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
                   children: [
-                    Text('\$',
+                    const Text('\$',
                         style: TextStyle(
                             fontSize: 10, fontWeight: FontWeight.bold)),
                     Text('${food.price}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
                   ],
                 )
