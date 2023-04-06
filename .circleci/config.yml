@@ -1,0 +1,52 @@
+version: 2.1
+orbs:
+  flutter: circleci/flutter@2.0.0
+  android: circleci/android@2.2.0
+
+jobs:
+  flutter-test:
+    machine:
+      image: android:2023.04.1
+    steps:
+      - checkout
+      - flutter/install_sdk:
+          version: 3.7.3
+      - run: flutter test -r json > report.json
+      - run: flutter analyze
+      - store_artifacts:
+          path: report.json
+  
+  flutter-build:
+    docker:
+      - image: cimg/android:2023.04
+    steps:
+      - checkout
+      - flutter/install_sdk_and_pub:
+          version: "3.7.3"
+      - run: flutter build apk
+      - android/start-emulator-and-run-tests:
+          pre-run-tests-steps:
+            - run: echo "beginning tests"
+          test-command: flutter test
+          pre-emulator-wait-steps:
+            - run: echo "waiting for emulator"
+          post-emulator-wait-steps:
+            - run: echo "emulator running"
+          post-run-tests-steps: 
+            - run: echo "run test done"
+            - run: mkdir testdata
+            - run: adb pull storage .
+          additional-avd-args: "-d pixel_3a -c 1G"
+          additional-emulator-args: "-memory 4096 -cores 3 -writable-system"
+      - store_artifacts:
+          path: build
+      - store_artifacts:
+          path: testdata
+
+workflows:
+  test-and-build-flutter:
+    jobs:
+      - flutter-test
+      - flutter-build:
+          requires:
+            - flutter-test
