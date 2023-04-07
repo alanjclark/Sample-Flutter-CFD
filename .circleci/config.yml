@@ -32,9 +32,7 @@ jobs:
             - run: echo "waiting for emulator"
           post-emulator-wait-steps:
             - run: echo "emulator running"
-          post-emulator-launch-assemble-command:
-            - run: flutter assemble
-            - run: flutter test --test-randomize-ordering-seed
+          post-emulator-launch-assemble-command: 'flutter assemble && flutter test --test-randomize-ordering-seed'
           post-run-tests-steps: 
             - run: echo "run test done"
             - run: mkdir testdata
