@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sample_flutter_cfd">
+    package="com.sample_flutter_cfd">
    <application
         android:label="sample_flutter_cfd"
         android:name="${applicationName}"
