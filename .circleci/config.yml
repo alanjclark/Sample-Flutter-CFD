@@ -23,7 +23,17 @@ jobs:
       - checkout
       - flutter/install_sdk_and_pub:
           version: "3.7.3"
-      - run: flutter build apk
+      - run:
+          name: Decode Android key store
+          command: cd android/app && echo $BASE64_KEYSTORE | base64 -d | tee keystore keystore > /dev/null
+      - run:
+          name: Create keystore.properties
+          command: cd android && printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=./keystore\nreleaseStorePassword=%s' \
+            $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_STORE_PASSWORD > keystore.properties
+      - run:
+          name: Create Google Play key
+          command: cd android/app && echo $GOOGLE_PLAY_KEY > ./google-play-key.json
+      # - run: flutter build apk
       - android/start-emulator-and-run-tests:
           pre-run-tests-steps:
             - run: echo "beginning tests"
@@ -32,7 +42,7 @@ jobs:
             - run: echo "waiting for emulator"
           post-emulator-wait-steps:
             - run: echo "emulator running"
-          post-emulator-launch-assemble-command: 'flutter test --test-randomize-ordering-seed'
+          post-emulator-launch-assemble-command: 'flutter test'
           post-run-tests-steps: 
             - run: echo "run test done"
             - run: mkdir testdata
@@ -43,11 +53,37 @@ jobs:
           path: build
       - store_artifacts:
           path: testdata
+  deploy-internal:
+    docker:
+      - image: cimg/android:2023.04
+    steps:
+      - checkout
+      - run:
+          name: Decode Android key store
+          command: cd android/app && echo $BASE64_KEYSTORE | base64 -d | tee keystore keystore > /dev/null
+      - run:
+          name: Create keystore.properties
+          command: cd android && printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=./keystore\nreleaseStorePassword=%s' \
+            $RELEASE_KEY_ALIAS $RELEASE_KEY_PASSWORD $RELEASE_STORE_PASSWORD > keystore.properties
+      - run:
+          name: Create Google Play key
+          command: cd android/app && echo $GOOGLE_PLAY_KEY > ./google-play-key.json
+      - flutter/install_sdk
+      - run: sudo gem install fastlane
+      - run: rm android/settings.gradle
+      - run:  echo "export FLUTTER_GIT_URL=ssh://git@github.com/flutter/flutter.git" >> "$BASH_ENV"
+      - run: flutter upgrade
+      - run: flutter create .
+      - run: cd android && fastlane deploy
+
 
 workflows:
   test-and-build-flutter:
     jobs:
       - flutter-test
       - flutter-build:
+          requires:
+            - flutter-test
+      - deploy-internal:
           requires:
             - flutter-test
