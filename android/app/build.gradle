@@ -27,7 +27,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 ext.versionMajor = 1
 ext.versionMinor = 0
-ext.versionPatch = 3
+ext.versionPatch = 4
 ext.versionClassifier = null
 ext.isSnapShot = false
 ext.minSdkVersion = 21
